@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace Lab_2
 {
-    interface ArrayMenu
-    {
-
-    }
     class ODArray
     {
         public int size;
