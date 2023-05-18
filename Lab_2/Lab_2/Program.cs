@@ -8,7 +8,7 @@ namespace Lab_2
         public int size;
         public int[] array;
 
-        public void InputElements()
+        public void InputElements()//метод вводу елементів
         {
             Console.WriteLine("Enter the number of elements in the array:");
             size = Convert.ToInt32(Console.ReadLine());
@@ -19,7 +19,7 @@ namespace Lab_2
                 array[i] = Convert.ToInt32(Console.ReadLine());
             }
         }
-        public void OutputElements()
+        public void OutputElements()//метод виводу елементів
         {
             Console.WriteLine("Main Array:");
             Console.Write("( ");
@@ -33,11 +33,11 @@ namespace Lab_2
             Console.Write(")");
             Console.WriteLine();
         }
-        public void SearchingMax()
+        public void SearchingMax()//пошук найбільшого елементу
         {
             Console.WriteLine("The Max element of massiv");
-            int max = int.MinValue;
-            foreach (int i in array)
+            float max = float.MinValue;
+            foreach (var i in array)
             {
                 if(i > max)
                 {
@@ -46,8 +46,21 @@ namespace Lab_2
             }
             Console.WriteLine("Maximun = " + max);
         }
-        public void SearchingScalarProduct(ODArray a)
+        public void SearchingScalarProduct(ODArray a)//пошук скалярного добутку двох векторів
         {
+            try
+            {
+                a.InputElements();
+                if(a.size != size)
+                {
+                    throw new Exception("Error. The sizes of arrays are diffrent. Need to change size of the vector");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                a.InputElements();
+            }
             Console.WriteLine("The Dot product of two vectors/arrays");
             int product = 0;
             for(int i = 0; i < size; i++)
@@ -57,7 +70,7 @@ namespace Lab_2
             Console.WriteLine("Dot product = " + product);
 
         }
-        public void FirstPositiveElements()
+        public void FirstPositiveElements()//сортування елементів масиву таким чином, щоб спочатку були розміщені всі додатні елементи, а потім всі від’ємні
         {
             Console.WriteLine("New massif:");
             int left = 0, right = array.Length - 1;
@@ -106,7 +119,7 @@ namespace Lab_2
 
         }
 
-        public void InputElements()
+        public void InputElements()//метод вводу елементів матриці
         {
             Console.WriteLine("Enter the number of rows in the matrix: ");
             size1 = Convert.ToInt32(Console.ReadLine());
@@ -115,7 +128,7 @@ namespace Lab_2
             Console.WriteLine("Enter the elements(coordinates) of the matrix:");
             matrix = new int[size1, size2];
             Console.WriteLine("1. Random entering - 2. Yorself entering:");
-            int select = Convert.ToInt32(Console.ReadLine());
+            int select = Convert.ToInt32(Console.ReadLine());//вибір між рандомним вводом та вручну
             if(select == 1){
                 Random ran = new Random();
                 Console.WriteLine("Enter the limits of number:");
@@ -145,7 +158,7 @@ namespace Lab_2
             Console.WriteLine();
 
         }
-        public void OutputElements()
+        public void OutputElements()//метод виводу елментів матриці
         {
             Console.WriteLine("Main matrix:");
             for (int i = 0; i < size1; i++)
@@ -156,7 +169,7 @@ namespace Lab_2
             }
 
         }
-        public void SortByEvenColumn()
+        public void SortByEvenColumn()//сортування по парним стовпцям
         {
             Console.WriteLine("New matrix");
             for(int i = 0; i< size1; i++)
@@ -189,7 +202,7 @@ namespace Lab_2
                 Console.Write("\n");
             }
         }
-        public void FindZeroColumn()
+        public void FindZeroColumn()//пошук нульового стовпця
         {
             Console.WriteLine("The number of column with zero element:");
             int kilk = 0;
@@ -213,7 +226,7 @@ namespace Lab_2
             }
             Console.WriteLine("Amount of zero column = " + kilk);
         }
-        public void DeterminedLongestSeries()
+        public void DeterminedLongestSeries()//знаходження найдовшої серії
         {
             Console.WriteLine("The line with the longest series of identical elements:");
             int LongestSeriesC = 0;
@@ -264,14 +277,14 @@ namespace Lab_2
 
             Console.WriteLine("The OD Array:");
             Console.WriteLine("-------------------------------");
-            ODArray arr = new ODArray();
+            ODArray arr = new ODArray();//масив
             arr.InputElements();
             arr.OutputElements();
             Console.WriteLine("-------------------------------");
 
             Console.WriteLine("The TD Array:");
             Console.WriteLine("-------------------------------");
-            TDArray mat = new TDArray();
+            TDArray mat = new TDArray();//матриця
             mat.InputElements();
             mat.OutputElements();
             Console.WriteLine("-------------------------------");
@@ -298,7 +311,6 @@ namespace Lab_2
                         break;
                     case 2:
                         ODArray vector = new ODArray();
-                        vector.InputElements();
                         arr.SearchingScalarProduct(vector);
                         break;
                     case 3:
