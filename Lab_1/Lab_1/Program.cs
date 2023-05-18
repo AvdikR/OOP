@@ -9,8 +9,7 @@ namespace Lab_1
 
         public TSquare()
         {
-            side1 = 0;
-            side2 = 0;
+            
         }
         public TSquare(double length, double height)
         {
@@ -116,9 +115,7 @@ namespace Lab_1
 
         public TCube()
         {
-            side1 = 0;
-            side2 = 0;
-            side3 = 0;
+            
         }
         public TCube(double length, double height, double width)
         {
