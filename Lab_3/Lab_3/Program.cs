@@ -43,21 +43,7 @@ namespace Lab_3
         public double A { get => a; set => a = value; }
         public double B { get => b; set => b = value; }
         public double C { get => c; set => c = value; }
-        /*
-        Point P1
-        {
-            get { return L1; }
-            set { L1 = value; }
-        }
-        Point ILineSegment.P1 { get => L1; set => L1 = value; }
         
-        Point P2
-        {
-            get { return L2; }
-            set { L2 = value; }
-        }
-        Point ILineSegment.P2 { get => L2; set => L2 = value; }
-        */
         public void IsParallelS(Line line1)
         {
             bool isParallel = true;
