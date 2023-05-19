@@ -6,7 +6,7 @@ namespace Lab_4
 {
     class Program
     {
-        static int CountPunctuation(List<char> chars)
+        /*static int CountPunctuation(List<char> chars)
         {
             int count = 0;
 
@@ -19,56 +19,69 @@ namespace Lab_4
             }
 
             return count;
-        }
-        static string OutputFileText(string form)
+        }*/
+        
+        static int CountPunctuationMarks(List<char> characters)
         {
-            string plainText;
-            plainText = form;
-            return plainText;
+            int count = 0;
+            char[] punctuationMarks = { '.', ',', ';', ':', '!', '?', '(', ')', '[', ']', '{', '}', '<', '>', '"', '\'', '/', '\\', '@', '#', '$', '%', '&', '*', '_', '`', '~', '^' };
+
+            foreach (char character in characters)
+            {
+                if (IsPunctuationMark(character, punctuationMarks))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        static bool IsPunctuationMark(char character, char[] punctuationMarks)
+        {
+            // Перевірка, чи символ є знаком пунктуації
+            if (Array.IndexOf(punctuationMarks, character) >= 0 && !IsSpecialCharacter(character))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static bool IsSpecialCharacter(char character)
+        {
+            // Перевірка, чи символ є спеціальним(+, - і так далі)
+            if (character == '+' || character == '-' || character == '"' || character == '№')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         static void Main(string[] args)
         {
             Console.WriteLine("Work of Vadym Rybchynchuk PP-21");
-            Console.WriteLine("Variant 3");
-            using StreamReader sr = new StreamReader("File1_Lab4.txt");
-            string form = File.ReadAllText("File1_Lab4.txt");
-            string form1 = File.ReadAllText("File2_Lab4.txt");
-            Console.WriteLine(form);
+            string file = "File1_Lab4.txt";
 
-            
-            byte select;
-            do
+            try
             {
-                Console.WriteLine("     ***");
-                Console.WriteLine("1. Task 1 ");
-                Console.WriteLine("2. Task 2 ");
-                Console.WriteLine("0. To end the task");
-                Console.WriteLine("     ***");
-                select = Convert.ToByte(Console.ReadLine());
-                Console.WriteLine();
-                switch (select)
-                {
-                    case 1:
-                        Console.WriteLine("Count puctuation marks in text from file 'File1_Lab4.txt''");
-                        List<char> textInFile1 = new List<char>(sr.ReadToEnd());
-                        int punctuationCount1 = CountPunctuation(textInFile1);
-                        Console.WriteLine("Number of punctuation marks: " + punctuationCount1);
-                        break;
-                    case 2:
-                        Console.WriteLine();
-                        string MainText = Console.ReadLine();
-                        File.WriteAllText(form1, MainText);
-                        List<char> textInFile2 = new List<char>(MainText);
-                        int punctuationCount2 = CountPunctuation(textInFile2);
-                        Console.WriteLine("Number of punctuation marks: " + punctuationCount2);
-                        break;
-                    
-                    default:
-                        break;
-                }
+                string fileContent = File.ReadAllText(file);
+                List<char> characters = new List<char>(fileContent);
+                Console.WriteLine("Text from file: " + fileContent);
+
+                int punctuationCount = CountPunctuationMarks(characters);
+
+                Console.WriteLine("Number of punctuation marks:" + punctuationCount);
             }
-            while (select != 0);
-            Console.WriteLine("The End of The Program!");
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error. This file" + file + " does not exist");
+            }
         }
+
     }
 }
