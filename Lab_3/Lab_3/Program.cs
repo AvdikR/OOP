@@ -124,31 +124,72 @@ namespace Lab_3
                         line12.IsParallelE(line22);
                         line12.IsPerpendicularE(line22);
                         break;
-                    case 3:
+                     case 3:
+                        //Створення двух прямих за допомогою ккординат(точок) власноруч
                         Line line13 = new Line();
                         Line line23 = new Line();
-                        Console.WriteLine("Enter the number of first eqyation:");
-                        line13.A = Convert.ToDouble(Console.ReadLine());
-                        line13.B = Convert.ToDouble(Console.ReadLine());
-                        line13.C = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Enter the number of second equation:");
-                        line23.A = Convert.ToDouble(Console.ReadLine());
-                        line23.B = Convert.ToDouble(Console.ReadLine());
-                        line23.C = Convert.ToDouble(Console.ReadLine());
-                        line13.IsParallelE(line23);
-                        line13.IsPerpendicularE(line23);
+
+                        try
+                        {
+                            Console.WriteLine("Enter the number of the first equation:");
+                            line13.A = Convert.ToDouble(Console.ReadLine());
+                            line13.B = Convert.ToDouble(Console.ReadLine());
+                            line13.C = Convert.ToDouble(Console.ReadLine());
+
+                            Console.WriteLine("Enter the number of the second equation:");
+                            line23.A = Convert.ToDouble(Console.ReadLine());
+                            line23.B = Convert.ToDouble(Console.ReadLine());
+                            line23.C = Convert.ToDouble(Console.ReadLine());
+
+                            line13.IsParallelE(line23);
+                            line13.IsPerpendicularE(line23);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please enter valid numbers for the coefficients.");
+                        }
+
                         break;
                     case 4:
+                        //Створення двух прямих за допомогою рівнянь власноруч
                         Line line14 = new Line();
                         Line line24 = new Line();
-                        Console.WriteLine("Enter the coordinates of first Point of 1st line:");
-                        line14.P1 = new Point(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Enter the coordinates of second Point of 1st line:");
-                        line14.P2 = new Point(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Enter the coordinates of first Point of 2st line:");
-                        line24.P1 = new Point(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
-                        Console.WriteLine("Enter the coordinates of second Point of 2st line:");
-                        line24.P2 = new Point(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
+                        
+                        try
+                        {
+                            Console.WriteLine("Enter the coordinates of the first Point of the 1st line:");
+                            double x1 = Convert.ToDouble(Console.ReadLine());
+                            double y1 = Convert.ToDouble(Console.ReadLine());
+
+                            Console.WriteLine("Enter the coordinates of the second Point of the 1st line:");
+                            double x2 = Convert.ToDouble(Console.ReadLine());
+                            double y2 = Convert.ToDouble(Console.ReadLine());
+
+                            line14.P1 = new Point(x1, y1);
+                            line14.P2 = new Point(x2, y2);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please enter valid coordinates.");
+                        }
+
+                        try
+                        {
+                            Console.WriteLine("Enter the coordinates of the first Point of the 1st line:");
+                            double x1 = Convert.ToDouble(Console.ReadLine());
+                            double y1 = Convert.ToDouble(Console.ReadLine());
+
+                            Console.WriteLine("Enter the coordinates of the second Point of the 1st line:");
+                            double x2 = Convert.ToDouble(Console.ReadLine());
+                            double y2 = Convert.ToDouble(Console.ReadLine());
+
+                            line24.P1 = new Point(x1, y1);
+                            line24.P2 = new Point(x2, y2);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please enter valid coordinates.");
+                        }
                         line14.IsParallelS(line24);
                         line14.IsPerpendicularS(line24);
                         break;
@@ -162,52 +203,4 @@ namespace Lab_3
         }   
     }
 }
-/*
-        public interface ILineSegment
-        {
-            Point P1 { get; set; }
-            Point P2 { get; set; }
-        }
 
-        // Інтерфейс для задання прямої за допомогою рівняння прямої Ax + By + C = 0
-        public interface ILineEquation
-        {
-            double A { get; set; }
-            double B { get; set; }
-            double C { get; set; }
-        }
-        
-        // Клас для виконання операцій з прямими на площині
-        
-        public class Line 
-        { 
-            
-            // Визначає, чи є дві прямі паралельними
-            
-            public static bool IsParallel(ILineSegment line1, ILineSegment line2)
-            {
-                double slope1 = (line1.P2.Y - line1.P1.Y) / (line1.P2.X - line1.P1.X);
-                double slope2 = (line2.P2.Y - line2.P1.Y) / (line2.P2.X - line2.P1.X);
-                return Math.Abs(slope1 - slope2) < 1e-6;
-            }
-
-            // Визначає, чи є дві прямі перпендикулярними
-            public static bool IsPerpendicular(ILineSegment line1, ILineSegment line2)
-            {
-                double slope1 = (line1.P2.Y - line1.P1.Y) / (line1.P2.X - line1.P1.X);
-                double slope2 = (line2.P2.Y - line2.P1.Y) / (line2.P2.X - line2.P1.X);
-                return Math.Abs(slope1 * slope2 + 1) < 1e-6;
-            }
-
-            // Визначає, чи є дві прямі паралельними
-            public static bool IsParallel(ILineEquation line1, ILineEquation line2)
-            {
-                return Math.Abs(line1.A / line1.B - line2.A / line2.B) < 1e-6;
-            }
-
-            // Визначає, чи є дві прямі перпендикулярними
-            public static bool IsPerpendicular(ILineEquation line1, ILineEquation line2)
-            {
-                return Math.Abs(line1.A * line2.A + line1.B * line2.B) < 1e-6;
-            }
-        }*/
